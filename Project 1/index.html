@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Statistik</title>
+    <style>
+        /* Gaya Dasar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Gaya Kartu Statistik */
+        .stat-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-title {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 5px 0;
+        }
+
+        .stat-change {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Indikator Naik/Turun */
+        .positive { color: #27ae60; }
+        .negative { color: #e74c3c; }
+
+    </style>
+</head>
+<body>
+
+    <div class="stats-container">
+        <!-- Pengunjung -->
+        <div class="stat-card">
+            <div class="stat-title"> Data statistik  ASN </div>
+            <div class="stat-value">67</div>
+            <div class="stat-change positive">▲ 12% dari bulan lalu</div>
+        </div>
+
+        <!-- Penjualan -->
+        <div class="stat-card">
+            <div class="stat-title"> statistik kedisplinan ASN</div>
+            <div class="stat-value"> 100 %</div>
+            <div class="stat-change positive">▲ 8.4% dari target</div>
+        </div>
+
+        <!-- Bounce Rate -->
+        <div class="stat-card">
+            <div class="stat-title">Pemanfaatan bmn</div>
+            <div class="stat-value">42.3%</div>
+            <div class="stat-change negative">▼ 2.1% (Peningkatan)</div>
+        </div>
+
+        <!-- Pengguna Aktif -->
+        <div class="stat-card">
+            <div class="stat-title">klien wajib lapor</div>
+            <div class="stat-value">1,205</div>
+            <div class="stat-change positive">▲ 54 user hari ini</div>
+        </div>
+        <!-- Pengguna Aktif -->
+        <div class="stat-card">
+            <div class="stat-title">Penyelesaian Litmas</div>
+            <div class="stat-value">1,205</div>
+            <div class="stat-change positive">▲ 54 user hari ini</div>
+        </div>
+    </div>
+
+</body>
+</html>
