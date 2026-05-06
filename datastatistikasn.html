@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komposisi ASN - Statistik Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0a 100%);
+            color: white;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+        }
+        .text-accent { color: #ff4d4d; }
+        .bg-accent { background-color: #ff4d4d; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <!-- Tombol Kembali -->
+        <a href="index.html" class="inline-block mb-6 text-gray-400 hover:text-white transition">
+            ← Kembali ke Dashboard
+        </a>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- KOLOM KIRI (Summary & Gender) -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="glass-card p-8">
+                    <h2 class="text-xl font-semibold opacity-80 uppercase tracking-wider">ASN BAPAS MATARAM</h2>
+                    <p class="text-sm text-gray-400 mb-4">Update data 10 mei 2026</p>
+                    <h1 class="text-5xl font-bold mb-8">67 PEGAWAI</h1>
+                    
+                    <!-- Pie Chart Laki-laki vs Perempuan --> 
+                    <div class="relative h-64 mb-6"> 
+                        <canvas id="pusatDaerahChart"></canvas>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                            <span>LAKI-LAKI</span>
+                            <span class="font-bold text-blue-400">67%</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                            <span>PEREMPUAN</span>
+                            <span class="font-bold text-pink-400">33%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KOLOM KANAN (Komposisi Pendidikan & Jabatan) -->
+            <div class="lg:col-span-8 space-y-6">
+                
+                <!-- Bar Chart Pendidikan -->
+                <div class="glass-card p-8">
+                    <h2 class="text-3xl font-bold mb-6 italic">KOMPOSISI PENDIDIKAN <span class="text-accent">ASN</span></h2>
+                    <div class="h-80">
+                        <canvas id="pendidikanChart"></canvas>
+                    </div>
+                    <p class="text-[10px] text-gray-500 mt-4 italic text-right">Sumber: Data Bezzetting Pegawai Mei 2026</p>
+                </div>
+
+                <!-- Grid Jabatan (Bawah) -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Card Jabatan -->
+                    <div class="glass-card p-4 text-center">
+                        <div class="w-16 h-16 mx-auto mb-2"><canvas id="ring1"></canvas></div>
+                        <p class="text-[10px] uppercase text-gray-400">Kepala</p>
+                        <p class="font-bold">1 </p>
+                    </div>
+                    <div class="glass-card p-4 text-center border-b-4 border-accent">
+                        <div class="w-16 h-16 mx-auto mb-2"><canvas id="ring2"></canvas></div>
+                        <p class="text-[10px] uppercase text-gray-400">Struktural </p>
+                        <p class="font-bold text-accent">12 </p>
+                    </div>
+                    <div class="glass-card p-4 text-center">
+                        <div class="w-16 h-16 mx-auto mb-2"><canvas id="ring3"></canvas></div>
+                        <p class="text-[10px] uppercase text-gray-400">JFT / Teknis </p>
+                        <p class="font-bold">34 </p>
+                    </div>
+                    <div class="glass-card p-4 text-center">
+                        <div class="w-16 h-16 mx-auto mb-2"><canvas id="ring4"></canvas></div>
+                        <p class="text-[10px] uppercase text-gray-400">JFU / Pelaksana</p>
+                        <p class="font-bold">20</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set Default ChartJS colors
+        Chart.defaults.color = '#888';
+
+        // 1. Chart Pusat vs Daerah (Pie)
+        new Chart(document.getElementById('pusatDaerahChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Laki-Laki', 'Perempuan'],
+                datasets: [{
+                    data: [45,22],
+                    backgroundColor: ['#ff4d4d', '#ffffff'],
+                    borderWidth: 0
+                }]
+            },
+            options: { plugins: { legend: { position: 'bottom' } } }
+        });
+
+        // 2. Chart Pendidikan (Bar)
+        new Chart(document.getElementById('pendidikanChart'), {
+            type: 'bar',
+            data: {
+                labels: ['SMA','D-III', 'D-IV', 'S-1', 'S-2', 'S-3'],
+                datasets: [{
+                    label: 'Jumlah ASN',
+                    data: [15,1,1,46,4,0],
+                    backgroundColor: '#ff4d4d',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } } }
+            }
+        });
+
+        // 3. Mini Rings (Doughnut) Helper Function
+        function createRing(id, val, color = '#ff4d4d') {
+            new Chart(document.getElementById(id), {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [val, 100-val],
+                        backgroundColor: [color, 'rgba(255,255,255,0.1)'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { cutout: '70%', plugins: { tooltip: {enabled: false}, legend: {display: false} } }
+            });
+        }
+
+        createRing('ring1', 11, '#ffffff');
+        createRing('ring2', 15, '#ff4d4d');
+        createRing('ring3', 35, '#ffffff');
+        createRing('ring4', 39, '#ffffff');
+    </script>
+</body>
+</html>
