@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struktur Organisasi Bapas Mataram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .video-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(30%);
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .profile-card {
+            background-color: rgba(38, 38, 38, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-card:hover {
+            transform: scale(1.03);
+            background-color: rgba(60, 60, 60, 0.9);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .btn-kembali {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-kembali:hover {
+            background-color: white;
+            color: #1a1a1a;
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+
+        /* Scrollbar styling untuk kenyamanan */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="disiplinbapas.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container mx-auto content-wrapper">
+        <h1 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white uppercase tracking-widest drop-shadow-2xl">
+            JFT Bapas Kelas I Mataram
+        </h1>
+        
+        <!-- Grid disesuaikan: 5 kolom di layar lebar agar muat banyak -->
+        <div id="profile-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            <!-- Kartu akan di-render oleh JS -->
+        </div>
+
+        <div class="flex justify-center mt-12 mb-10">
+            <a href="javascript:history.back()" class="btn-kembali">
+                <i class="fas fa-chevron-left"></i> Kembali
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Data Pegawai (Total 34 Profil)
+        const teamData = [];
+        
+        // Menambahkan data contoh secara otomatis hingga 34 orang
+        const jftNames = ["ARIMIN, Bc.IP., S.Pd.", "SUTRISNO, S.H.", "MAHMUD, S.Sos", "ANI SURYANI, M.H.", "BUDI SANTOSO, S.AP"];
+        const jftJabatan = ["Pembimbing Kemasyarakatan Madya", "Pembimbing Kemasyarakatan Muda", "Pembimbing Kemasyarakatan Pertama"];
+
+        for (let i = 1; i <= 34; i++) {
+            teamData.push({
+                name: i === 1 ? jftNames[0] : `PEGAWAI JFT ${i}, S.H.`,
+                nip: `19${70 + (i%20)}${String(i).padStart(2, '0')}XXXXXXXXXX`,
+                jabatan: jftJabatan[i % 3],
+                pangkat: i % 2 === 0 ? "Penata (III/c)" : "Penata Muda (III/b)"
+            });
+        }
+
+        const grid = document.getElementById('profile-grid');
+
+        teamData.forEach(person => {
+            grid.innerHTML += `
+                <div class="profile-card p-5 text-center shadow-lg">
+                    <h2 class="text-white font-bold text-sm mb-3 tracking-normal leading-tight min-h-[40px] flex items-center justify-center border-b border-white/10 pb-2">
+                        ${person.name}
+                    </h2>
+                    <div class="text-gray-300 text-[11px] leading-relaxed relative px-2">
+                        <p class="text-blue-400 font-mono mb-1">NIP. ${person.nip}</p>
+                        <p class="mb-1">
+                            <span class="block text-gray-400 text-[9px] uppercase tracking-tighter">Jabatan</span>
+                            <span class="font-medium text-white text-[10px]">${person.jabatan}</span>
+                        </p>
+                        <p class="text-[10px] text-gray-400 mt-1">${person.pangkat}</p>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

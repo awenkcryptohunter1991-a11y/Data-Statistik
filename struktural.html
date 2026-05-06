@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struktur Organisasi Bapas Mataram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .video-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(40%);
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .profile-card {
+            background-color: rgba(38, 38, 38, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 100%;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(50, 50, 50, 0.95);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid rgba(243, 244, 246, 0.8);
+            margin-top: -60px;
+            background-color: #d1d5db;
+        }
+
+        /* Gaya Tombol Kembali */
+        .btn-kembali {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-kembali:hover {
+            background-color: white;
+            color: #1a1a1a;
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="disiplinbapas.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container mx-auto content-wrapper">
+        <h1 class="text-3xl md:text-5xl font-bold text-center mb-24 text-white uppercase tracking-widest drop-shadow-2xl">
+            Struktural Bapas Kelas I Mataram
+        </h1>
+        
+        <div id="profile-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-20">
+            <!-- Kartu di-render oleh JS -->
+        </div>
+
+        <!-- Tombol Kembali Simetris di Bagian Bawah -->
+        <div class="flex justify-center mt-20 mb-10">
+            <a href="javascript:history.back()" class="btn-kembali shadow-xl">
+                <i class="fas fa-chevron-left"></i> Kembali
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const teamData = [
+            { name: "ARIMIN, Bc.IP., S.Pd.", img: "Kabapas.png", nip: "196912311993031001", jabatan: "Kepala Bapas", pangkat: "Pembina Tk.I (IV/b)" },
+            { name: "PEGAWAI 2, S.H.", img: "avatar.png", nip: "19800101XXXXXXXXXX", jabatan: "Kasubag Tata Usaha", pangkat: "Penata (III/c)" },
+            { name: "PEGAWAI 3, S.Sos", img: "avatar.png", nip: "19850101XXXXXXXXXX", jabatan: "Kasi BKD", pangkat: "Penata (III/c)" },
+            { name: "PEGAWAI 4, M.H.", img: "avatar.png", nip: "19820101XXXXXXXXXX", jabatan: "Kasi BPKP", pangkat: "Penata Muda (III/b)" },
+            { name: "PEGAWAI 5, S.H.", img: "avatar.png", nip: "19900101XXXXXXXXXX", jabatan: "PK Ahli Madya", pangkat: "Pembina (IV/a)" },
+            { name: "PEGAWAI 6, S.AP", img: "avatar.png", nip: "19920101XXXXXXXXXX", jabatan: "PK Ahli Muda", pangkat: "Penata (III/c)" },
+            { name: "PEGAWAI 7, S.Psi", img: "avatar.png", nip: "19950101XXXXXXXXXX", jabatan: "PK Ahli Pertama", pangkat: "Penata Muda (III/a)" },
+            { name: "PEGAWAI 8, S.H.", img: "avatar.png", nip: "19880101XXXXXXXXXX", jabatan: "Bendahara", pangkat: "Penata Muda (III/b)" },
+            { name: "PEGAWAI 9, A.Md", img: "avatar.png", nip: "19940101XXXXXXXXXX", jabatan: "Pengelola TI", pangkat: "Pengatur (II/c)" },
+            { name: "PEGAWAI 10, S.E.", img: "avatar.png", nip: "19830101XXXXXXXXXX", jabatan: "Analis Kepegawaian", pangkat: "Penata (III/c)" },
+            { name: "PEGAWAI 11, S.H.", img: "avatar.png", nip: "19910101XXXXXXXXXX", jabatan: "Penyusun Laporan", pangkat: "Penata Muda (III/a)" },
+            { name: "PEGAWAI 12, S.Sos", img: "avatar.png", nip: "19870101XXXXXXXXXX", jabatan: "Arsiparis", pangkat: "Penata Muda (III/b)" }
+        ];
+
+        const grid = document.getElementById('profile-grid');
+
+        teamData.forEach(person => {
+            grid.innerHTML += `
+                <div class="profile-card flex flex-col items-center p-6 text-center shadow-2xl">
+                    <img src="${person.img}" alt="${person.name}" class="profile-image shadow-lg">
+                    <h2 class="text-white font-bold text-lg mt-4 mb-4 tracking-normal leading-tight h-12 flex items-center justify-center">
+                        ${person.name}
+                    </h2>
+                    <div class="text-gray-300 text-xs italic leading-relaxed relative px-4 pb-4">
+                        <span class="text-2xl font-serif absolute -left-1 -top-2 text-gray-500 opacity-40">"</span>
+                        <p class="mb-1 text-[10px]">NIP : ${person.nip}</p>
+                        <p class="mb-1">
+                            <span>Jabatan : </span>
+                            <span class="font-bold text-white">${person.jabatan}</span>
+                        </p>
+                        <p>Pangkat : ${person.pangkat}.</p>
+                        <span class="text-2xl font-serif absolute -right-1 bottom-0 text-gray-500 opacity-40">"</span>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

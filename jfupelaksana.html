@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struktur Organisasi Bapas Mataram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .video-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(30%);
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .profile-card {
+            background-color: rgba(38, 38, 38, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-card:hover {
+            transform: scale(1.03);
+            background-color: rgba(60, 60, 60, 0.9);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .btn-kembali {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-kembali:hover {
+            background-color: white;
+            color: #1a1a1a;
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+    </style>
+</head>
+<body class="p-6 md:p-12">
+
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="disiplinbapas.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container mx-auto content-wrapper">
+        <h1 class="text-3xl md:text-5xl font-bold text-center mb-20 text-white uppercase tracking-widest drop-shadow-2xl">
+         JFU Bapas Kelas I Mataram
+        </h1>
+        
+        <!-- Grid disesuaikan menjadi 4 kolom (Genap untuk 20 profil) -->
+        <div id="profile-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Kartu di-render oleh JS -->
+        </div>
+
+        <div class="flex justify-center mt-20 mb-10">
+            <a href="javascript:history.back()" class="btn-kembali">
+                <i class="fas fa-chevron-left"></i> Kembali
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Data Pegawai (Total 20 Profil)
+        const teamData = [];
+        const jfuJabatan = ["Pengelola TI", "Penyusun Laporan", "Arsiparis", "Bendahara"];
+
+        for (let i = 1; i <= 20; i++) {
+            teamData.push({
+                name: `PEGAWAI JFU ${i}, S.Sos.`,
+                nip: `19${75 + (i%15)}${String(i).padStart(2, '0')}XXXXXXXXXX`,
+                jabatan: jfuJabatan[i % 4],
+                pangkat: i % 2 === 0 ? "Penata (III/c)" : "Penata Muda (III/b)"
+            });
+        }
+
+        const grid = document.getElementById('profile-grid');
+
+        teamData.forEach(person => {
+            grid.innerHTML += `
+                <div class="profile-card p-6 text-center shadow-lg">
+                    <h2 class="text-white font-bold text-base mb-4 tracking-normal leading-tight min-h-[44px] flex items-center justify-center border-b border-white/10 pb-3">
+                        ${person.name}
+                    </h2>
+                    <div class="text-gray-300 text-xs leading-relaxed relative px-2">
+                        <p class="text-blue-400 font-mono mb-2 tracking-tighter">NIP. ${person.nip}</p>
+                        <p class="mb-2">
+                            <span class="block text-gray-500 text-[10px] uppercase tracking-widest mb-1">Jabatan</span>
+                            <span class="font-medium text-white text-sm">${person.jabatan}</span>
+                        </p>
+                        <p class="text-[11px] text-gray-400 bg-white/5 py-1 rounded-full mt-2 italic">${person.pangkat}</p>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
