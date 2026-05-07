@@ -3,132 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Struktur Organisasi Bapas Mataram</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Dashboard Pegawai - Live Sync</title>
     <style>
-        .video-bg {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            z-index: -1;
-            object-fit: cover;
-            filter: brightness(30%);
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent-color: #38bdf8;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
         }
 
-        .content-wrapper {
-            position: relative;
-            z-index: 10;
-        }
-
-        .profile-card {
-            background-color: rgba(38, 38, 38, 0.8);
-            backdrop-filter: blur(12px);
-            border-radius: 1rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        body { 
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
         }
 
-        .profile-card:hover {
-            transform: scale(1.03);
-            background-color: rgba(60, 60, 60, 0.9);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        h1 {
+            text-align: center;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 40px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .btn-kembali {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 1px;
+        .container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            gap: 25px; 
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-grow: 1; /* Membuat container mengambil ruang yang tersedia */
+        }
+
+        /* Desain Kartu */
+        .card { 
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px; 
+            padding: 30px; 
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .name { 
+            font-weight: 700; 
+            font-size: 1.25rem; 
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .nip-badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'Monaco', monospace;
+            margin-bottom: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .info-group {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .label { 
+            font-size: 0.65rem; 
+            color: var(--text-secondary);
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            margin-bottom: 5px;
+        }
+
+        .value { 
+            font-size: 0.95rem; 
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+
+        /* Navigasi Bawah (Footer) */
+        .footer-nav {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px 0;
+        }
+
+        .btn-back {
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .btn-kembali:hover {
-            background-color: white;
-            color: #1a1a1a;
-            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        .btn-back:hover {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
         }
 
-        /* Scrollbar styling untuk kenyamanan */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #1a1a1a; }
-        ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+        .btn-back svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-back:hover svg {
+            transform: translateX(-5px);
+        }
+
+        .loading {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 100px;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body>
 
-    <video autoplay muted loop playsinline class="video-bg">
-        <source src="disiplinbapas.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <h1>DAFTAR PEGAWAI JFT</h1>
 
-    <div class="container mx-auto content-wrapper">
-        <h1 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white uppercase tracking-widest drop-shadow-2xl">
-            JFT Bapas Kelas I Mataram
-        </h1>
-        
-        <!-- Grid disesuaikan: 5 kolom di layar lebar agar muat banyak -->
-        <div id="profile-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <!-- Kartu akan di-render oleh JS -->
-        </div>
+    <div id="team-container" class="container">
+        <div class="loading">Tunggu yaa pak statistisinya sedang menarik data dari google drive...</div>
+    </div>
 
-        <div class="flex justify-center mt-12 mb-10">
-            <a href="javascript:history.back()" class="btn-kembali">
-                <i class="fas fa-chevron-left"></i> Kembali
-            </a>
-        </div>
+    <div class="footer-nav">
+        <button onclick="window.history.back()" class="btn-back">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+            Kembali ke Halaman Sebelumnya
+        </button>
     </div>
 
     <script>
-        // Data Pegawai (Total 34 Profil)
-        const teamData = [];
-        
-        // Menambahkan data contoh secara otomatis hingga 34 orang
-        const jftNames = ["ARIMIN, Bc.IP., S.Pd.", "SUTRISNO, S.H.", "MAHMUD, S.Sos", "ANI SURYANI, M.H.", "BUDI SANTOSO, S.AP"];
-        const jftJabatan = ["Pembimbing Kemasyarakatan Madya", "Pembimbing Kemasyarakatan Muda", "Pembimbing Kemasyarakatan Pertama"];
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQWloCGg5ALamIYWbfD_Q4qetuf3sHXxtZjb2FcjGOroGYwkE5znsVZFSwaL9AcfIMUr8rlz_uQ3xRW/pub?output=csv';
 
-        for (let i = 1; i <= 34; i++) {
-            teamData.push({
-                name: i === 1 ? jftNames[0] : `PEGAWAI JFT ${i}, S.H.`,
-                nip: `19${70 + (i%20)}${String(i).padStart(2, '0')}XXXXXXXXXX`,
-                jabatan: jftJabatan[i % 3],
-                pangkat: i % 2 === 0 ? "Penata (III/c)" : "Penata Muda (III/b)"
-            });
+        async function fetchData() {
+            try {
+                const response = await fetch(sheetUrl);
+                const csvData = await response.text();
+                
+                const rows = csvData.split('\n').filter(row => row.trim() !== '');
+                const dataRows = rows.slice(1); 
+                
+                const container = document.getElementById('team-container');
+                container.innerHTML = ''; 
+
+                dataRows.forEach(row => {
+                    const columns = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    
+                    if (columns.length >= 4) {
+                        const name = columns[0].replace(/"/g, '');
+                        const nip = columns[1].replace(/"/g, '');
+                        const jabatan = columns[2].replace(/"/g, '');
+                        const pangkat = columns[3].replace(/"/g, '');
+
+                        const card = `
+                            <div class="card">
+                                <div class="name">${name}</div>
+                                <div class="nip-badge">NIP. ${nip}</div>
+                                <div class="info-group">
+                                    <div class="label">Jabatan</div>
+                                    <div class="value">${jabatan}</div>
+                                    <div class="value" style="color:#64748b; font-size: 0.8rem; margin-top:5px;">${pangkat}</div>
+                                </div>
+                            </div>
+                        `;
+                        container.innerHTML += card;
+                    }
+                });
+            } catch (error) {
+                console.error("Error:", error);
+            }
         }
 
-        const grid = document.getElementById('profile-grid');
-
-        teamData.forEach(person => {
-            grid.innerHTML += `
-                <div class="profile-card p-5 text-center shadow-lg">
-                    <h2 class="text-white font-bold text-sm mb-3 tracking-normal leading-tight min-h-[40px] flex items-center justify-center border-b border-white/10 pb-2">
-                        ${person.name}
-                    </h2>
-                    <div class="text-gray-300 text-[11px] leading-relaxed relative px-2">
-                        <p class="text-blue-400 font-mono mb-1">NIP. ${person.nip}</p>
-                        <p class="mb-1">
-                            <span class="block text-gray-400 text-[9px] uppercase tracking-tighter">Jabatan</span>
-                            <span class="font-medium text-white text-[10px]">${person.jabatan}</span>
-                        </p>
-                        <p class="text-[10px] text-gray-400 mt-1">${person.pangkat}</p>
-                    </div>
-                </div>
-            `;
-        });
+        fetchData();
+        setInterval(fetchData, 30000);
     </script>
 </body>
 </html>
