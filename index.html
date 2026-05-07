@@ -127,16 +127,34 @@ background-clip: text;
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+        } /* Copy dan letakkan di baris 130 */
+.sigap-tagline {
+    font-size: 15px;
+    color: #cbd5e1;
+    margin: 8px 0;
+}
+
+.sigap-tagline .letter {
+    color: #88ee66; /* Warna biru cerah untuk inisial */
+    font-weight: 800;
+    font-size: 17px;
+    text-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
+}
+    </style> 
 </head>
 <body>
 
     <!-- Bagian Profil Berdasarkan image_2ad21e.png -->
     <div class="profile-section">
         <img src="aweng.jpg" alt="Foto Profil" class="profile-img">
-        <h1 class="profile-name">DATA STATISTIK, <span>BAPAS MATARAM</span></h1>
-        <p class="profile-role">"Lebih dari Sekadar Angka, <span>Cerita yang Tersembunyi di Balik Data" </p>
+        <h1 class="profile-name">SIGAP, <span>BAPAS MATARAM</span></h1>
+        <p class="sigap-tagline">
+    <span class="letter">S</span>tatistik 
+    <span class="letter">I</span>nspiratif, Dalam 
+    <span class="letter">G</span>enggaman 
+    <span class="letter">A</span>kurat & 
+    <span class="letter">P</span>raktis
+</p>
         <p class="profile-role">Lalu Awang Wihartana - Statistisi Ahli Pertama</p>
     </div>
 
