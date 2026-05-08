@@ -20,7 +20,7 @@
             /* Background Radial Gradient sesuai image_2ad21e.png */
             background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0a 100%);
             background-attachment: fixed;
-            color: white;
+            color: rgb(255, 255, 255);
         }
 
         /* --- Bagian Profil (Atas) --- */
@@ -144,17 +144,29 @@ background-clip: text;
 </head>
 <body>
 
-    <!-- Bagian Profil Berdasarkan image_2ad21e.png -->
-    <div class="profile-section">
-        <img src="aweng.jpg" alt="Foto Profil" class="profile-img">
-        <h1 class="profile-name">SIGAP, <span>BAPAS MATARAM</span></h1>
-        <p class="sigap-tagline">
-    <span class="letter">S</span>tatistik 
-    <span class="letter">I</span>nspiratif, Dalam 
-    <span class="letter">G</span>enggaman 
-    <span class="letter">A</span>kurat & 
-    <span class="letter">P</span>raktis
-</p>
+   <!-- Bagian Profil Berdasarkan image_2ad21e.png -->
+<div class="profile-section">
+    <img src="aweng.jpg" alt="Foto Profil" class="profile-img">
+    
+    <!-- Warna SIGAP di sini akan mengikuti class .profile-name di CSS -->
+    <h1 class="profile-name">SIGAP, <span>BAPAS MATARAM</span></h1>
+    
+    <!-- Tagline Akronim -->
+    <p class="sigap-tagline">
+        <span class="letter">S</span>tatistik 
+        <span class="letter">I</span>nformasi dalam 
+        <span class="letter">G</span>engg<span class="letter">A</span>man 
+        <span class="letter">P</span>raktis
+    </p>
+
+    <!-- Deskripsi Tambahan -->
+    <div class="sigap-description">
+        <p>
+            Satu Genggaman, Informasi statistik tersaji. Selamat datang di Dashboard <strong>SIGAP</strong> (Statistik Informasi dalam Genggaman Praktis). 
+            Fokus kami adalah menghadirkan data statistik yang tidak hanya bermanfaat untuk monitoring pelaporan internal, 
+            namun memudahkan pengguna untuk melihat informasi data statistik yang praktis dan akurat dapat diakses kapan saja dimana saja — semuanya dalam satu genggaman.
+        </p>
+</div>
         <p class="profile-role">Lalu Awang Wihartana - Statistisi Ahli Pertama</p>
     </div>
 
