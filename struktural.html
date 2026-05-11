@@ -7,15 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .video-bg {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            z-index: -1;
-            object-fit: cover;
-            filter: brightness(40%);
+        /* CSS UNTUK BACKGROUND FOTO */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* Ganti 'backgroundstruktural.png' dengan nama file foto Anda */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('backgroundstruktural.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
         .content-wrapper {
@@ -48,7 +50,6 @@
             background-color: #d1d5db;
         }
 
-        /* Gaya Tombol Kembali */
         .btn-kembali {
             background-color: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
@@ -75,11 +76,7 @@
 </head>
 <body class="p-6 md:p-10">
 
-    <video autoplay muted loop playsinline class="video-bg">
-        <source src="disiplinbapas.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
+    <!-- Container Utama -->
     <div class="container mx-auto content-wrapper">
         <h1 class="text-3xl md:text-5xl font-bold text-center mb-24 text-white uppercase tracking-widest drop-shadow-2xl">
             Struktural Bapas Kelas I Mataram
@@ -89,7 +86,6 @@
             <!-- Kartu di-render oleh JS -->
         </div>
 
-        <!-- Tombol Kembali Simetris di Bagian Bawah -->
         <div class="flex justify-center mt-20 mb-10">
             <a href="javascript:history.back()" class="btn-kembali shadow-xl">
                 <i class="fas fa-chevron-left"></i> Kembali
@@ -107,10 +103,10 @@
             { name: "MA`RUF", img: "Maruf.png", nip: "197910012001121001", jabatan: "Ka Subsi Bimker Klien Anak", pangkat: "Penata Muda Tk.I (III/b)" },
             { name: "MASNIAR DAHLIA,S.H.", img: "Liya.png", nip: "198510282005012001", jabatan: "Kaur Umum", pangkat: "Penata Muda Tk.I (III/b)" },
             { name: "RAJA ADIL ARDIANSYAH SORMIN,S.H.", img: "Ucok.png", nip: "197812022003121002", jabatan: "Ka Subsi BKD", pangkat: "Penata Tk.I (III/d)" },
-            { name: "MOH. ZAINUL AHZAN.S.PdI.", img: "avatar.png", nip: "198401292010121001", jabatan: "Ka Subsi BKA", pangkat: "Penata (III/c)" },
-            { name: "LEO PUTRA CAHYA,S.E.", img: "avatar.png", nip: "199008142012121001", jabatan: "Kaur Kepegawaian", pangkat: "Penata Muda (III/b)" },
-            { name: "FAOZIAH,S.H.", img: "avatar.png", nip: "199109212010122001", jabatan: "Ka Subsi Registrasi Klien Dewasa", pangkat: "Penata (III/c)" },
-            { name: "LISA FARADEBI HERNANI, S.Tr.Pas.", img: "avatar.png", nip: "199806082023012001", jabatan: "Ka Subsi Registrasi Klien Anak", pangkat: "Penata Muda (III/a)" }
+            { name: "MOH. ZAINUL AHZAN.S.PdI.", img: "ahzan.png", nip: "198401292010121001", jabatan: "Ka Subsi BKA", pangkat: "Penata (III/c)" },
+            { name: "LEO PUTRA CAHYA,S.E.", img: "leo.png", nip: "199008142012121001", jabatan: "Kaur Kepegawaian", pangkat: "Penata Muda (III/b)" },
+            { name: "FAOZIAH,S.H.", img: "zee.png", nip: "199109212010122001", jabatan: "Ka Subsi Registrasi Klien Dewasa", pangkat: "Penata (III/c)" },
+            { name: "LISA FARADEBI HERNANI, S.Tr.Pas.", img: "lisa.png", nip: "199806082023012001", jabatan: "Ka Subsi Registrasi Klien Anak", pangkat: "Penata Muda (III/a)" }
         ];
 
         const grid = document.getElementById('profile-grid');
