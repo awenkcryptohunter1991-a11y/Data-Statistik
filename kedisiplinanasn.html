@@ -51,7 +51,7 @@
                 <h1 class="text-3xl font-bold tracking-tighter uppercase italic">
                     Monitoring <span class="text-accent">Keterlambatan</span>
                 </h1>
-                <p class="text-gray-400 text-sm">Periode Mei 2026 • Bapas Kelas I Mataram</p>
+                <p class="text-gray-400 text-sm">Periode Bulan Mei 2026 • Bapas Kelas I Mataram</p>
             </div>
             <div class="flex gap-3">
                 <!-- Link Google Drive -->
@@ -70,51 +70,51 @@
             <div class="lg:col-span-4 space-y-6">
                 <!-- Rata-rata & Kedisiplinan (Tetap) -->
                 <div class="glass-card p-6">
-                    <p class="text-gray-400 text-xs uppercase mb-1">Rata-rata Terlambat</p>
-                    <h2 class="text-4xl font-bold">12 <span class="text-sm font-normal opacity-50">Menit/Hari</span></h2>
+                    <p class="text-gray-400 text-xs uppercase mb-1">Update Jumlah ASN Terlambat sampai hari ini</p>
+                    <h2 class="text-4xl font-bold">2<span class="text-sm font-normal opacity-67"> (Orang)</span></h2>
                     <div class="w-full bg-white/10 h-1.5 mt-4 rounded-full overflow-hidden">
-                        <div class="bg-accent h-full" style="width: 65%"></div>
+                        <div class="bg-accent h-full" style="width: 3%"></div>
                     </div>
                 </div>
 
                 <!-- NEW SECTION: Jumlah ASN Terlambat Per Bagian -->
                 <div class="glass-card p-6">
-                    <h3 class="text-xs font-semibold mb-4 border-b border-white/10 pb-2 uppercase tracking-widest italic">ASN Terlambat Per Bagian</h3>
+                    <h3 class="text-xs font-semibold mb-4 border-b border-white/10 pb-2 uppercase tracking-widest italic">ASN Terlambat Per Bagian sampai saat ini</h3>
                     <div class="grid grid-cols-3 gap-2">
                         <div class="text-center p-2 rounded-xl bg-white/5 border border-white/5">
                             <p class="text-[10px] text-gray-400 uppercase">TU</p>
-                            <p class="text-xl font-bold">5</p>
+                            <p class="text-xl font-bold">0</p>
                         </div>
                         <div class="text-center p-2 rounded-xl bg-white/5 border border-white/5">
                             <p class="text-[10px] text-gray-400 uppercase">BKD</p>
-                            <p class="text-xl font-bold text-accent">8</p>
+                            <p class="text-xl font-bold text-accent">1</p>
                         </div>
                         <div class="text-center p-2 rounded-xl bg-white/5 border border-white/5">
                             <p class="text-[10px] text-gray-400 uppercase">BKA</p>
-                            <p class="text-xl font-bold">3</p>
+                            <p class="text-xl font-bold">1</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="glass-card p-6">
                     <p class="text-gray-400 text-xs uppercase mb-1">Tingkat Kedisiplinan</p>
-                    <h2 class="text-4xl font-bold text-green-400">92.4 <span class="text-sm font-normal opacity-50 text-white">%</span></h2>
+                    <h2 class="text-4xl font-bold text-green-400">97 <span class="font-normal opacity-50 text-white">%</span></h2>
                 </div>
 
                 <div class="glass-card p-6">
-                    <h3 class="text-sm font-semibold mb-4 border-b border-white/10 pb-2 uppercase italic">Kategori Durasi</h3>
+                    <h3 class="text-sm font-semibold mb-4 border-b border-white/10 pb-2 uppercase italic">Keterangan tidak hadir</h3>
                     <div class="space-y-4">
                         <div class="flex justify-between items-center text-xs">
-                            <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-500"></div> < 5 Menit</span>
-                            <span class="font-bold">45 Pegawai</span>
+                            <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-500"></div>  Cuti</span>
+                            <span class="font-bold">9 Pegawai</span>
                         </div>
                         <div class="flex justify-between items-center text-xs">
-                            <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-yellow-500"></div> 5 - 15 Menit</span>
-                            <span class="font-bold">18 Pegawai</span>
-                        </div>
-                        <div class="flex justify-between items-center text-xs">
-                            <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-red-500"></div> > 15 Menit</span>
+                            <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-yellow-500"></div> Sakit</span>
                             <span class="font-bold">4 Pegawai</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-red-500"></div>  Terlambat</span>
+                            <span class="font-bold">2  Pegawai</span>
                         </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
             <!-- Charts & Table (Right) - Tetap -->
             <div class="lg:col-span-8 space-y-6">
                 <div class="glass-card p-8">
-                    <h2 class="text-lg font-bold mb-6 italic uppercase">Tren Mingguan <span class="text-accent text-xs not-italic font-normal ml-2 opacity-60">(Menit Terakumulasi)</span></h2>
+                    <h2 class="text-lg font-bold mb-6 italic uppercase">Tren Mingguan <span class="text-accent text-xs not-italic font-normal ml-2 opacity-60">(Jumlah ASN Terakumulasi)</span></h2>
                     <div class="h-64">
                         <canvas id="delayTrendChart"></canvas>
                     </div>
@@ -139,29 +139,29 @@
                             <thead>
                                 <tr>
                                     <th>Pegawai</th>
-                                    <th>Frekuensi</th>
-                                    <th>Total Durasi</th>
+                                    <th>Frekuensi terlambat</th>
+                                    <th>Eselon IV</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="font-semibold">Pegawai JFT 14</td>
-                                    <td>4 Kali</td>
-                                    <td class="text-accent">48 Menit</td>
-                                    <td><span class="px-2 py-0.5 bg-red-500/20 text-red-500 text-[10px] rounded">Teguran Lisan</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="font-semibold">Pegawai JFU 05</td>
-                                    <td>3 Kali</td>
-                                    <td>32 Menit</td>
-                                    <td><span class="px-2 py-0.5 bg-yellow-500/20 text-yellow-500 text-[10px] rounded">Peringatan</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="font-semibold">Pegawai JFT 22</td>
-                                    <td>2 Kali</td>
-                                    <td>15 Menit</td>
+                                    <td class="font-semibold">URBAN MURDANIL, S.Tr.Pas</td>
+                                    <td>1 Kali</td>
+                                    <td>BKD</td>
                                     <td><span class="px-2 py-0.5 bg-blue-500/20 text-blue-500 text-[10px] rounded">Evaluasi</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">NOVA TIKA UDAYANI, S.H.</td>
+                                    <td>1 Kali</td>
+                                    <td>BKA</td>
+                                    <<td><span class="px-2 py-0.5 bg-blue-500/20 text-blue-500 text-[10px] rounded">Evaluasi</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -185,8 +185,8 @@
             data: {
                 labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'],
                 datasets: [{
-                    label: 'Total Keterlambatan (Menit)',
-                    data: [120, 85, 150, 60, 45],
+                    label: 'Total Keterlambatan (Jumlah ASN)',
+                    data: [1, 0, 0, 1, 0],
                     borderColor: '#ff4d4d',
                     backgroundColor: gradient,
                     fill: true,

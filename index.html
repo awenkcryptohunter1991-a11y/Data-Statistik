@@ -139,7 +139,30 @@ background-clip: text;
     font-weight: 800;
     font-size: 17px;
     text-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
-}
+}/* --- Efek Klik dan Hover Baru --- */
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(162, 155, 254, 0.15);
+            border-color: rgba(162, 155, 254, 0.8);
+            box-shadow: 0 0 30px rgba(162, 155, 254, 0.3);
+            cursor: pointer;
+        }
+
+        .stat-card:active {
+            transform: scale(0.95);
+            background: rgba(162, 155, 254, 0.3);
+            border-color: #a29bfe;
+            box-shadow: 0 0 50px rgba(162, 155, 254, 0.6);
+            transition: all 0.1s ease;
+        }
+
+        /* Animasi Ripple */
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
     </style> 
 </head>
 <body>
@@ -181,7 +204,7 @@ background-clip: text;
 
         <div class="stat-card" onclick="window.location.href='kedisiplinanasn.html'">
             <div class="stat-title">Kehadiran Real Time ASN</div>
-            <div class="stat-value">100%</div>
+            <div class="stat-value">97%</div>
             <div class="stat-change">▲ 98% dari target</div>
         </div>
 
@@ -216,5 +239,33 @@ background-clip: text;
             ← Kembali ke Beranda
         </a>
     </div>
+<script>
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.addEventListener('mousedown', function (e) {
+                // Membuat elemen lingkaran untuk efek klik (ripple)
+                let ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                
+                // Mengatur posisi ripple berdasarkan klik
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${e.clientX - rect.left - size/2}px`;
+                ripple.style.top = `${e.clientY - rect.top - size/2}px`;
+                ripple.style.position = 'absolute';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple-animation 0.6s linear';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => { ripple.remove(); }, 600);
+            });
+        });
+    </script>
 </body>
 </html>
