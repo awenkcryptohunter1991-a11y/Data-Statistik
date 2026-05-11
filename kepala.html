@@ -7,15 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .video-bg {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            z-index: -1;
-            object-fit: cover;
-            filter: brightness(50%);
+        /* --- KODE UNTUK BACKGROUND FOTO --- */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* GANTI 'backgroundkabapas.png' dengan nama file foto Anda */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('backgroundkabapas.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
         .content-wrapper {
@@ -49,7 +51,6 @@
             background-color: #d1d5db;
         }
 
-        /* Gaya Tombol Kembali */
         .btn-back {
             background-color: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
@@ -75,21 +76,14 @@
 </head>
 <body class="p-10">
 
-    <video autoplay muted loop playsinline class="video-bg">
-        <source src="disiplinbapas.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
     <div class="container mx-auto content-wrapper">
         <h1 class="text-4xl font-bold text-center mb-24 text-white uppercase tracking-tight drop-shadow-lg">
             Kepala Bapas Kelas I Mataram
         </h1>
         
         <div id="profile-grid" class="flex justify-center items-center flex-grow">
-            <!-- Kartu Rendered by JS -->
-        </div>
+            </div>
 
-        <!-- Tombol Kembali Simetris di Bawah -->
         <div class="flex justify-center mt-16 mb-10">
             <a href="javascript:history.back()" class="btn-back shadow-xl">
                 <i class="fas fa-arrow-left"></i> Kembali
@@ -121,22 +115,17 @@
                     
                     <div class="text-gray-300 text-sm italic leading-relaxed relative px-6">
                         <span class="text-3xl font-serif absolute -left-2 -top-4 text-gray-500 opacity-50">"</span>
-                        
                         <p class="mb-1">NIP : ${person.nip}</p>
-                        
                         <p class="mb-1">
                             <span>Jabatan : </span>
                             <span class="font-bold text-white">${person.jabatan}</span>
                         </p>
-                        
                         <p>Pangkat : ${person.pangkat}.</p>
-                        
                         <span class="text-3xl font-serif absolute -right-2 -bottom-4 text-gray-500 opacity-50">"</span>
                     </div>
                 </div>
             `;
         });
     </script>
-
 </body>
 </html>

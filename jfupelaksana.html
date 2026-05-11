@@ -14,15 +14,23 @@
         }
 
         body { 
-            background-color: var(--bg-color);
-            background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
-            color: var(--text-primary);
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 40px 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+            /* KODE UNTUK BACKGROUND FOTO */
+            /* Angka 0.8 di bawah adalah tingkat kegelapan (overlay). 
+               Semakin besar angkanya, semakin gelap fotonya agar teks jelas. */
+            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
+                              url('backgroundstruktural.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Background tidak ikut bergeser saat di-scroll */
+            background-repeat: no-repeat;
         }
 
         h1 {
