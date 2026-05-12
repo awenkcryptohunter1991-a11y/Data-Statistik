@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Lapor Diri Bapas - Dashboard Terpadu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #00d2ff; 
+            --accent-anak: #2ecc71; 
+            --bg-dark: #0f172a;
+            --card-bg: rgba(15, 23, 42, 0.85); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                        url('Backgroundwajiblapor.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #00d2ff, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-nav {
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* --- STYLING KARTU INFO BAWAH (TENGAH) --- */
+        .info-footer-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 40px;
+            padding-bottom: 20px;
+        }
+
+        .info-banner {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 3px solid var(--primary);
+            padding: 15px 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 600px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .info-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .info-text strong {
+            color: var(--primary);
+        }
+
+        /* Container Tampilan */
+        #view-visualisasi { display: flex; flex-direction: column; gap: 30px; }
+        
+        #view-spreadsheet { 
+            display: none; 
+            width: 100%; 
+            height: 80vh; 
+            border-radius: 25px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            background: white;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .category-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+
+        .label-stats {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 20px 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .card-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stats-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+        .card {
+            background: rgba(255, 255, 255, 0.07);
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid transparent;
+        }
+
+        .card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.12); }
+        .card h3 { font-size: 0.9rem; margin-bottom: 5px; }
+        .card p { font-size: 0.75rem; opacity: 0.6; }
+
+        .chart-container {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            height: 250px;
+        }
+
+        .dewasa-section .category-title { color: var(--primary); }
+        .dewasa-section .card.active {
+            background: rgba(0, 210, 255, 0.15);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+        }
+
+        .anak-section .category-title { color: var(--accent-anak); }
+        .anak-section .card.active {
+            background: rgba(46, 204, 113, 0.15);
+            border-color: var(--accent-anak);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+        }
+
+        .full-width { grid-column: span 2; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .section-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .nav-container { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Statistik Klien Wajib Lapor</h1>
+        <p>Visualisasi Jumlah Data Klien yang datang Wajib Lapor di Bapas Kelas I Mataram</p>
+    </header>
+
+    <div class="nav-container">
+        <a href="index.html" class="btn-nav">← Kembali ke Dashboard</a>
+        
+        <div id="toggle-btn" class="btn-nav" onclick="showSpreadsheet()">
+            📂 Klik disini untuk melihat sumber data
+        </div>
+        
+        <div id="back-btn" class="btn-nav" onclick="showVisualisasi()" style="display: none;">
+            📊 Kembali ke Grafik
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div id="view-visualisasi">
+            <div class="section-grid">
+                <!-- SEKSI DEWASA -->
+                <div class="category-box dewasa-section">
+                    <h2 class="category-title">Klien Dewasa</h2>
+                    <span class="label-stats">Jumlah Keseluruhan: 56 Klien</span>
+                    <div class="card-group">
+                        <div class="card" onclick="toggleGlow(this)"><h3>PB Dewasa</h3><p id="txt-pb-d">Loading...</p></div>
+                        <div class="card" onclick="toggleGlow(this)"><h3>CB Dewasa</h3><p id="txt-cb-d">Loading...</p></div>
+                    </div>
+                    <span class="label-stats">Statistik Kedatangan:</span>
+                    <div class="chart-container"><canvas id="chartDewasaBar"></canvas></div>
+                    <span class="label-stats">TOP PK/APK | Wilayah | Jenis Kasus:</span>
+                    <div class="stats-group">
+                        <div class="card"><h3>Siti Rutmawati</h3><p>6 Klien</p></div>
+                        <div class="card"><h3>Wil. Cakranegara</h3><p>7 Klien</p></div>
+                        <div class="card"><h3>Narkotika</h3><p>20 Klien</p></div>
+                    </div>
+                </div>
+
+                <!-- SEKSI ANAK -->
+                <div class="category-box anak-section">
+                    <h2 class="category-title">Klien Anak</h2>
+                    <span class="label-stats">Jumlah Keseluruhan: 0 Klien</span>
+                    <div class="card-group">
+                        <div class="card" onclick="toggleGlow(this)"><h3>PB Anak</h3><p id="txt-pb-a">Loading...</p></div>
+                        <div class="card" onclick="toggleGlow(this)"><h3>CB Anak</h3><p id="txt-cb-a">Loading...</p></div>
+                    </div>
+                    <span class="label-stats">Statistik Kedatangan:</span>
+                    <div class="chart-container"><canvas id="chartAnakBar"></canvas></div>
+                    <span class="label-stats">TOP PK/APK | Wilayah | Jenis Kasus:</span>
+                    <div class="stats-group">
+                        <div class="card"><h3>Ibu Maya</h3><p>0 Klien</p></div>
+                        <div class="card"><h3>Wil. Utara</h3><p>0 Klien</p></div>
+                        <div class="card"><h3>Wil. Selatan</h3><p>0 Klien</p></div>
+                    </div>
+                </div>
+
+                <div class="category-box full-width">
+                    <h2 class="category-title" style="color: #fff;">Perbandingan Akumulasi PB vs CB</h2>
+                    <div class="section-grid">
+                        <div class="chart-container" style="height: 300px;"><canvas id="chartDewasaPie"></canvas></div>
+                        <div class="chart-container" style="height: 300px;"><canvas id="chartAnakPie"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KARTU INFO UPDATE (BAWAH & TENGAH) -->
+            <div class="info-footer-container">
+                <div class="info-banner">
+                    <div class="info-text">
+                        <p>Data ini di update setiap minggu di <strong>hari Senin</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-spreadsheet">
+            <iframe 
+                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT5NhfGUD2X1i9XXCJ9aDKCI6Gy_YkOenBaiiJ-qgdW40l3BJINiOLJTURHqU4IfKgMJgmmr0zOXF-D/pubhtml" 
+                style="width: 100%; height: 100%; border: none;">
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        function showSpreadsheet() {
+            document.getElementById('view-visualisasi').style.display = 'none';
+            document.getElementById('view-spreadsheet').style.display = 'block';
+            document.getElementById('toggle-btn').style.display = 'none';
+            document.getElementById('back-btn').style.display = 'inline-flex';
+        }
+
+        function showVisualisasi() {
+            document.getElementById('view-visualisasi').style.display = 'flex';
+            document.getElementById('view-spreadsheet').style.display = 'none';
+            document.getElementById('toggle-btn').style.display = 'inline-flex';
+            document.getElementById('back-btn').style.display = 'none';
+        }
+
+        let charts = {};
+
+        function toggleGlow(element) {
+            const section = element.closest('.category-box');
+            section.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // FUNGSI INISIALISASI DATA MANUAL (STATIS)
+        function initDashboard() {
+            // --- GANTI ANGKA DI SINI ---
+            const valPBD = 41;  // PB Dewasa (Sesuai Gambar)
+            const valCBD = 15;  // CB Dewasa
+            const valPBA = 0;  // PB Anak
+            const valCBA = 0;   // CB Anak
+            // ---------------------------
+
+            document.getElementById('txt-pb-d').innerText = valPBD + " Klien";
+            document.getElementById('txt-cb-d').innerText = valCBD + " Klien";
+            document.getElementById('txt-pb-a').innerText = valPBA + " Anak";
+            document.getElementById('txt-cb-a').innerText = valCBA + " Anak";
+
+            renderAllCharts(valPBD, valCBD, valPBA, valCBA);
+        }
+
+        function renderAllCharts(pbD, cbD, pbA, cbA) {
+            const commonOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#fff' } },
+                    x: { ticks: { color: '#fff' } }
+                }
+            };
+
+            charts.dBar = new Chart(document.getElementById('chartDewasaBar'), {
+                type: 'bar',
+                data: {
+                    labels: ['PB Dewasa', 'CB Dewasa'],
+                    datasets: [{ data: [pbD, cbD], backgroundColor: ['#00d2ff', '#3a7bd5'], borderRadius: 10 }]
+                },
+                options: commonOptions
+            });
+
+            charts.aBar = new Chart(document.getElementById('chartAnakBar'), {
+                type: 'bar',
+                data: {
+                    labels: ['PB Anak', 'CB Anak'],
+                    datasets: [{ data: [pbA, cbA], backgroundColor: ['#2ecc71', '#27ae60'], borderRadius: 10 }]
+                },
+                options: commonOptions
+            });
+
+            charts.dPie = new Chart(document.getElementById('chartDewasaPie'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['PB Dewasa', 'CB Dewasa'],
+                    datasets: [{ data: [pbD, cbD], backgroundColor: ['#00d2ff', '#3a7bd5'], borderWidth: 0 }]
+                },
+                options: { ...commonOptions, plugins: { legend: { display: true, labels: { color: '#fff' } } } }
+            });
+
+            charts.aPie = new Chart(document.getElementById('chartAnakPie'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['PB Anak', 'CB Anak'],
+                    datasets: [{ data: [pbA, cbA], backgroundColor: ['#2ecc71', '#27ae60'], borderWidth: 0 }]
+                },
+                options: { ...commonOptions, plugins: { legend: { display: true, labels: { color: '#fff' } } } }
+            });
+        }
+
+        window.onload = initDashboard;
+    </script>
+</body>
+</html>
